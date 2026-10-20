@@ -8,29 +8,24 @@ import MySQLdb
 import sys
 
 
-def list_all_states():
-    """
-    Connects to a MySQL server and prints all states
-    from the states table sorted by id.
-    """
-    db = MySQLdb.connect(
-        host="localhost",
-        port=3306,
-        user=sys.argv[1],
-        passwd=sys.argv[2],
-        db=sys.argv[3],
-        charset="utf8"
-    )
-    cursor = db.cursor()
-    cursor.execute("SELECT * FROM states ORDER BY states.id ASC")
-    rows = cursor.fetchall()
+"""
+Connects to a MySQL server and prints all states
+from the states table sorted by id.
+"""
+db = MySQLdb.connect(
+    host="localhost",
+    port=3306,
+    user=sys.argv[1],
+    passwd=sys.argv[2],
+    db=sys.argv[3],
+    charset="utf8"
+)
+cursor = db.cursor()
+cursor.execute("SELECT * FROM states ORDER BY states.id ASC")
+rows = cursor.fetchall()
 
-    for row in rows:
-        print(row)
+for row in rows:
+    print(row)
 
-    cursor.close()
-    db.close()
-
-
-if __name__ == "__main__":
-    list_all_states()
+cursor.close()
+db.close()
