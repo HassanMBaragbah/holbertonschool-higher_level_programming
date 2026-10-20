@@ -8,7 +8,7 @@ import MySQLdb
 import sys
 
 
-def list_states():
+def list_all_states():
     """
     Connects to a MySQL server and prints all states
     from the states table sorted by id.
@@ -24,11 +24,13 @@ def list_states():
     cursor = db.cursor()
     cursor.execute("SELECT * FROM states ORDER BY states.id ASC")
     rows = cursor.fetchall()
+
     for row in rows:
         print(row)
+
     cursor.close()
     db.close()
 
 
 if __name__ == "__main__":
-    list_states()
+    list_all_states()
