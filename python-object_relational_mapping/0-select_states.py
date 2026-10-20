@@ -1,16 +1,16 @@
 #!/usr/bin/python3
 """
 This module connects to a MySQL database and lists all states
-from the hbtn_0e_0_usa database in ascending order by id.
+from the hbtn_0e_0_usa database in ascending order by states.id.
 """
 
 import MySQLdb
 import sys
 
-if __name__ == "__main__":
+
+def select_states():
     """
-    Connects to the database using command-line arguments
-    and prints all states from the states table.
+    Connects to the database and prints all the states sorted by id.
     """
     db = MySQLdb.connect(
         host="localhost",
@@ -30,3 +30,7 @@ if __name__ == "__main__":
 
     cursor.close()
     db.close()
+
+
+if __name__ == "__main__":
+    select_states()
