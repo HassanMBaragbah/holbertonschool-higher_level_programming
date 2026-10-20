@@ -12,20 +12,16 @@ import sys
 Connects to a MySQL server and prints all states
 from the states table sorted by id.
 """
-db = MySQLdb.connect(
-    host="localhost",
-    port=3306,
-    user=sys.argv[1],
-    passwd=sys.argv[2],
-    db=sys.argv[3],
-    charset="utf8"
-)
-cursor = db.cursor()
-cursor.execute("SELECT * FROM states ORDER BY states.id ASC")
-rows = cursor.fetchall()
-
-for row in rows:
-    print(row)
-
-cursor.close()
-db.close()
+if __name__ == "__main__":
+    conn = MySQLdb.connect(
+        host="localhost",
+        port=3306,
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3])
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM states ORDER BY id ASC")
+    for row in cur.fetchall():
+        print(row)
+    cur.close()
+    conn.close()
