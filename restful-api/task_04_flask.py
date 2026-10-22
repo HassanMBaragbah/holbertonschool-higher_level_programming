@@ -4,7 +4,6 @@ from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
-# تخزين المستخدمين في الذاكرة (بدون بيانات تجريبية ثابتة لتجنب مشاكل التصحيح)
 users = {}
 
 
@@ -52,7 +51,6 @@ def add_user():
     if username in users:
         return jsonify({"error": "Username already exists"}), 409
 
-    # إضافة المستخدم الجديد
     users[username] = data
     return jsonify({
         "message": "User added",

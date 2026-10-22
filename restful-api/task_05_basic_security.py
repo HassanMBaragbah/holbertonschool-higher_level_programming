@@ -12,12 +12,10 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 app = Flask(__name__)
 
-# إعداد مفتاح سري لـ JWT
 app.config["JWT_SECRET_KEY"] = "super-secret-key-change-this"
 jwt = JWTManager(app)
 auth = HTTPBasicAuth()
 
-# تخزين المستخدمين في الذاكرة
 users = {
     "user1": {
         "username": "user1",
@@ -90,7 +88,6 @@ def admin_only():
     return "Admin Access: Granted"
 
 
-# تخصيص معالجات أخطاء التوكن لضمان إرجاع 401 دائماً حسب متطلبات الاختبار
 @jwt.unauthorized_loader
 def handle_unauthorized_error(err):
     return jsonify({"error": "Missing or invalid token"}), 401
