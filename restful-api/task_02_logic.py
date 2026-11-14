@@ -1,9 +1,13 @@
 #!/usr/bin/python3
-"""Serve three pages rendered with Jinja templates."""
+"""Render Flask pages and display items loaded from JSON."""
+
+import json
+from pathlib import Path
 
 from flask import Flask, render_template
 
 app = Flask(__name__)
+ITEMS_FILE = Path(__file__).resolve().with_name("items.json")
 
 
 @app.route("/")
@@ -22,6 +26,15 @@ def about():
 def contact():
     """Render the contact page."""
     return render_template("contact.html")
+
+
+@app.route("/items")
+def items():
+    """Load the items and render the items page."""
+    with ITEMS_FILE.open(encoding="utf-8") as file:
+        data = json.load(file)
+
+    return render_template("items.html", items=data.get("items", []))
 
 
 if __name__ == "__main__":
